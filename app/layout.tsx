@@ -82,7 +82,7 @@ function SiteFooter() {
             Modules
           </Link>
           <a
-            href="https://github.com/ap-lab/rag-workshop-timor-leste"
+            href="https://github.com/mitrapartogi13/rag-workshop"
             target="_blank"
             rel="noreferrer"
             className="hover:text-slate-900"

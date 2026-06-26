@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MobileNav } from "@/components/mobile-nav";
 import { GitHubIcon, SearchIcon } from "@/components/icons";
 
-const GITHUB_URL = "https://github.com/ap-lab/rag-workshop-timor-leste";
+const GITHUB_URL = "https://github.com/mitrapartogi13/rag-workshop.git";
 
 /**
  * Sticky top bar: semi-transparent white with a backdrop blur and a single
