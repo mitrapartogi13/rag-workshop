@@ -31,15 +31,15 @@ export function SiteHeader() {
           </Link>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
-            <SearchBar />
+            {/* <SearchBar /> */}
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+              className="inline-flex h-12 w-12 items-center justify-center rounded-md text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
               aria-label="GitHub repository"
             >
-              <GitHubIcon className="h-5 w-5" />
+              <GitHubIcon className="h-8 w-8" />
             </a>
           </div>
         </div>
@@ -53,20 +53,20 @@ export function SiteHeader() {
  * for the workshop site, so this is a calm placeholder with a keyboard hint —
  * exactly how the Tailwind docs present their search trigger.
  */
-function SearchBar() {
-  return (
-    <button
-      type="button"
-      className="group flex items-center gap-2 rounded-md border border-slate-200 bg-slate-50 py-1.5 pl-2.5 pr-2 text-sm text-slate-400 transition-colors hover:border-slate-300 hover:bg-white sm:w-64"
-      aria-label="Search documentation"
-    >
-      <SearchIcon className="h-4 w-4 text-slate-400 group-hover:text-slate-500" />
-      <span className="hidden flex-1 text-left sm:inline">
-        Search documentation...
-      </span>
-      <kbd className="hidden items-center gap-0.5 rounded border border-slate-200 bg-white px-1.5 font-mono text-[0.65rem] font-medium text-slate-400 sm:inline-flex">
-        Ctrl K
-      </kbd>
-    </button>
-  );
-}
+// function SearchBar() {
+//   return (
+//     <button
+//       type="button"
+//       className="group flex items-center gap-2 rounded-md border border-slate-200 bg-slate-50 py-1.5 pl-2.5 pr-2 text-sm text-slate-400 transition-colors hover:border-slate-300 hover:bg-white sm:w-64"
+//       aria-label="Search documentation"
+//     >
+//       <SearchIcon className="h-4 w-4 text-slate-400 group-hover:text-slate-500" />
+//       <span className="hidden flex-1 text-left sm:inline">
+//         Search documentation...
+//       </span>
+//       <kbd className="hidden items-center gap-0.5 rounded border border-slate-200 bg-white px-1.5 font-mono text-[0.65rem] font-medium text-slate-400 sm:inline-flex">
+//         Ctrl K
+//       </kbd>
+//     </button>
+//   );
+// }
