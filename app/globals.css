@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-slate-700 antialiased;
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 32;
+  }
+
+  ::selection {
+    @apply bg-sky-100 text-sky-900;
+  }
+
+  /* Quiet, thin scrollbars so the independently-scrolling panels don't shout. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.slate.200") transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-200;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-300;
+  }
+}
+
+@layer components {
+  /* ---- Syntax highlighting tokens (Shiki-style palette on slate-900) ---- */
+  .tok-comment {
+    color: #64748b; /* slate-500 */
+    font-style: italic;
+  }
+  .tok-string {
+    color: #6ee7b7; /* emerald-300 */
+  }
+  .tok-number {
+    color: #fbbf24; /* amber-400 */
+  }
+  .tok-keyword {
+    color: #f472b6; /* pink-400 */
+  }
+  .tok-function {
+    color: #38bdf8; /* sky-400 */
+  }
+  .tok-decorator {
+    color: #c084fc; /* purple-400 */
+  }
+  .tok-variable {
+    color: #fbbf24; /* amber-400 */
+  }
+  .tok-flag {
+    color: #38bdf8; /* sky-400 */
+  }
+
+  /* ---- Prose tables tuned to the Tailwind docs look ---- */
+  .prose table {
+    @apply my-6 w-full text-sm;
+  }
+  .prose thead {
+    @apply border-b border-slate-200;
+  }
+  .prose thead th {
+    @apply px-3 py-2 text-left font-semibold text-slate-900;
+  }
+  .prose tbody tr {
+    @apply border-b border-slate-100;
+  }
+  .prose tbody td {
+    @apply px-3 py-2 align-top text-slate-600;
+  }
+}
