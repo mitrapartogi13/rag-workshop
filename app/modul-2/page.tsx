@@ -7,7 +7,7 @@ import { modul2Quiz } from "@/lib/quizzes";
 import { CodeBlock } from "@/components/code-block";
 
 export const metadata: Metadata = {
-  title: "Module 2: Building a Chatbot with Gemini",
+  title: "Module 2: Building a Chatbot with SENOPATI",
 };
 
 export default function Modul2Page() {
@@ -15,75 +15,27 @@ export default function Modul2Page() {
     <DocArticle
       href="/modul-2"
       eyebrow="Workshop Modules"
-      title="Module 2: Building a Chatbot with Gemini"
-      lead="Get a Google Gemini API key, set up your local environment, and serve a working chat application with FastAPI — your first real LLM-powered app."
-    >
+      title="Module 2: Building a Chatbot with SENOPATI"
+      lead="Get a SENOPATI API key, set up your local environment, and serve a working chat application with FastAPI your first real LLM-powered app.">
       <p>
         To build a chatbot using an LLM, we need an <strong>API key</strong> to
-        access the model. In this module we will use <strong>Google Gemini</strong>{" "}
-        as our LLM. Below are the steps to get a Gemini API key and use it.
+        access the model. In this module we will use <strong>SENOPATI</strong>{" "}
+        as our LLM. Below are the steps to get a SENOPATI API key and use it.
       </p>
 
-      <H2>Getting a Gemini API Key</H2>
+      <H2>Getting a SENOPATI API Key</H2>
 
-      <H3>Step 1: Open Google AI Studio</H3>
+      <H3>Wait for the instructor to give you the API Key :)</H3>
       <p>
         Open your browser and go to{" "}
         <a
           href="https://aistudio.google.com/app/apikey"
           target="_blank"
-          rel="noreferrer"
-        >
+          rel="noreferrer">
           Google AI Studio
         </a>
         .
       </p>
-
-      <H3>Step 2: Sign in with Google</H3>
-      <p>
-        Click <strong>&quot;Sign in with Google&quot;</strong> and log in with
-        your Google account.
-      </p>
-
-      <H3>Step 3: Create an API Key</H3>
-      <p>
-        After signing in you will land on the API Key page. Click{" "}
-        <strong>&quot;Create API Key&quot;</strong> to generate a new key.
-      </p>
-      <Figure
-        src="https://github.com/user-attachments/assets/3805c43f-fd9b-42ae-8594-252de2b22f66"
-        alt="The Google AI Studio screen showing the Create API Key button."
-        caption="Google AI Studio — the Create API Key button."
-      />
-
-      <H3>Step 4: Choose a Google Cloud Project</H3>
-      <p>
-        If you already have a Google Cloud project, you can select it. Otherwise,
-        click <strong>&quot;Create new project&quot;</strong> to make a new one.
-      </p>
-      <Figure
-        src="https://github.com/user-attachments/assets/48227bd5-833e-4c44-a56d-94d28b0669f6"
-        alt="Selecting an existing Google Cloud project."
-        maxWidth={521}
-      />
-      <Figure
-        src="https://github.com/user-attachments/assets/8992d6e5-543c-4ca5-9602-babf07fd8ad5"
-        alt="Creating a new Google Cloud project for the API key."
-        caption="Pick an existing project, or create a new one."
-        maxWidth={514}
-      />
-
-      <H3>Step 5: Copy the API Key</H3>
-      <p>
-        Once the key is created, click <strong>&quot;Copy&quot;</strong> to copy
-        it. Store it somewhere safe and <strong>do not share it</strong> with
-        anyone.
-      </p>
-      <Figure
-        src="https://github.com/user-attachments/assets/b51ae4d1-fada-4974-8c60-0e876c44910a"
-        alt="The Copy button next to the generated API key."
-        maxWidth={240}
-      />
       <Callout type="warning" title="Keep your key secret">
         An API key is a credential. Never commit it to a public repository and
         never paste it directly into shared code. We will store it in a separate{" "}
@@ -96,14 +48,57 @@ export default function Modul2Page() {
         the libraries required to run the Python server.
       </p>
 
+      <H3>Install Python</H3>
+      <p>
+        Check whether it&apos;s already available by opening a terminal
+        (in VS Code: <strong>Terminal &gt; New Terminal</strong>) and running:
+      </p>
+      <CodeBlock lang="bash" code={`python --version`} />
+      <p>
+        If you see an error instead of a version number (e.g.{" "}
+        <code>3.11.x</code>), download and install Python from{" "}
+        <a href="https://www.python.org/downloads/" target="_blank" rel="noreferrer">
+          python.org/downloads
+        </a>
+        . On Windows, make sure to check{" "}
+        <strong>&quot;Add python.exe to PATH&quot;</strong> during setup, then
+        restart your terminal afterwards.
+      </p>
+
       <H3>Install the libraries</H3>
       <p>
         Open a terminal or command prompt in your project directory and run:
       </p>
       <CodeBlock
         lang="bash"
-        code={`pip install fastapi uvicorn google-genai python-dotenv`}
+        code={`pip install fastapi uvicorn requests pydantic python-dotenv`}
       />
+      <p>
+        Here&apos;s what each library is for:
+      </p>
+      <ul>
+        <li>
+          <code>fastapi</code> — the web framework used to build the{" "}
+          <code>/chat</code> API endpoint and serve the page.
+        </li>
+        <li>
+          <code>uvicorn</code> — the ASGI server that actually runs the
+          FastAPI app (called via <code>uvicorn.run(...)</code>).
+        </li>
+        <li>
+          <code>requests</code> — used to send the HTTP request to the
+          SENOPATI gateway in <code>call_llm()</code>.
+        </li>
+        <li>
+          <code>pydantic</code> — provides <code>BaseModel</code>, used to
+          validate the incoming chat request body.
+        </li>
+        <li>
+          <code>python-dotenv</code> — loads variables from the{" "}
+          <code>.env</code> file (via <code>load_dotenv()</code>) so the API
+          key and model settings stay out of the code.
+        </li>
+      </ul>
 
       <H3>Create the .env file</H3>
       <p>
@@ -114,25 +109,27 @@ export default function Modul2Page() {
       <CodeBlock
         lang="bash"
         filename=".env"
-        code={`GEMINI_API_KEY=PASTE_YOUR_COPIED_API_KEY_HERE`}
+        code={`LLM_API_KEY=PASTE_SENOPATI_KEY_HERE\nLLM_BASE_URL=https://proxy.lab-alpro.com\nLLM_MODEL=qwen3.5:9b
+        `}
       />
 
       <H2>The Backend (main.py)</H2>
       <p>
-        Create a file named <code>main.py</code> and add the following code. This
-        is the &quot;brain&quot; that connects the user interface to the Gemini AI
-        model.
+        Create a file named <code>main.py</code> and add the following code.
+        This is the &quot;brain&quot; that connects the user interface to the
+        SENOPATI AI.
       </p>
       <CodeBlock
         lang="python"
         filename="main.py"
         code={`import os
-from fastapi import FastAPI, Request
+import requests
+from fastapi import FastAPI, Request, UploadFile, File
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from google import genai
 from pydantic import BaseModel
 from dotenv import load_dotenv
+from rag import process_pdf, retrieve, has_documents
 
 load_dotenv()
 
@@ -146,8 +143,45 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-api_key_val = os.getenv("GEMINI_API_KEY")
-client = genai.Client(api_key=api_key_val)
+# Model configuration is read from .env so it can be changed easily without touching the code.
+# This gateway (Senopati AI Gateway) is an authenticated proxy in front of Ollama:
+#   - chat endpoint: POST {BASE_URL}/v1/chat
+#   - request & response follow the Ollama format (not OpenAI)
+API_KEY = os.getenv("LLM_API_KEY")
+BASE_URL = os.getenv("LLM_BASE_URL", "https://proxy.lab-alpro.com").rstrip("/")
+MODEL = os.getenv("LLM_MODEL", "qwen3.5:9b")
+
+
+def call_llm(prompt: str) -> str:
+    """Send the prompt to the gateway and return the model's reply text."""
+    resp = requests.post(
+        f"{BASE_URL}/v1/chat",
+        headers={
+            "Authorization": f"Bearer {API_KEY}",
+            "Content-Type": "application/json",
+            # Some proxies (Cloudflare) reject non-browser clients.
+            "User-Agent": "Mozilla/5.0",
+        },
+        json={
+            "model": MODEL,
+            "messages": [{"role": "user", "content": prompt}],
+            "stream": False,
+        },
+        timeout=120,
+    )
+
+    # The gateway uses a consistent error envelope: {"error": {"code", "message", ...}}.
+    # Surface the original message so it's easy to diagnose (IP, model, rate limit, etc).
+    if resp.status_code != 200:
+        try:
+            err = resp.json().get("error", {})
+            raise RuntimeError(f"[{err.get('code')}] {err.get('message')}")
+        except ValueError:
+            resp.raise_for_status()
+
+    data = resp.json()
+    # Ollama response format: {"message": {"role": "...", "content": "..."}, ...}
+    return data["message"]["content"]
 
 class ChatRequest(BaseModel):
     message: str
@@ -160,22 +194,31 @@ async def get_index():
 @app.post("/chat")
 async def chat(request: ChatRequest):
     try:
-        prompt = """Act as an assistant in Competitive Programming.\\n
-        Be as acknowledgeable in the subject as possible.\\n
-        Be as annoying as possible. Connect every single prompt to competitive programming.\\n
-        Even a simple hello should be connected to competitive programming.\\n
-        Act like you're trying to "solve" the user's message, even if it's not a problem to solve.\\n
-        Please use standard LaTeX for math and Markdown for bolding.\\n
-        This is your next prompt: """
-        user_msg = request.message
-        prompt += user_msg
-
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
+        personality = (
+            "Act as an assistant in Competitive Programming."
+            "Be as acknowledgeable in the subject as possible."
+            "Be as annoying as possible. Connect every single prompt to competitive programming."
+            "Even a simple hello should be connected to competitive programming."
+            "Act like you're trying to 'solve' the user's message, even if it's not a problem to solve."
+            "Please use standard LaTeX for math and Markdown for bolding."
         )
 
-        return {"response": response.text}
+        user_msg = request.message
+
+        if has_documents():
+            # RAG mode: there are stored documents
+            # Retrieve the relevant chunks, then inject them as context into the prompt
+            context = retrieve(user_msg)
+            prompt = (
+                f"{personality}"
+                f"Here is the relevant context from the documents:{context}"
+                f"Question: {user_msg}"
+            )
+        else:
+            # Fallback mode: no documents yet, use the plain prompt
+            prompt = f"{personality}This is your next prompt: {user_msg}"
+
+        return {"response": call_llm(prompt)}
     except Exception as e:
         print(f"CRITICAL ERROR: {e}")
         return {"response": f"Internal Error: {str(e)}"}
@@ -184,19 +227,6 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="localhost", port=8000)`}
       />
-      <Callout type="note" title="Explore other models">
-        You can explore the available Gemini models in the{" "}
-        <a
-          href="https://ai.google.dev/gemini-api/docs/models"
-          target="_blank"
-          rel="noreferrer"
-        >
-          official model list
-        </a>
-        . Here we use <code>gemini-2.5-flash</code>, which is fast and free-tier
-        friendly.
-      </Callout>
-
       <H2>The Frontend (index.html)</H2>
       <p>
         Create a file named <code>index.html</code> in the same folder. You can
@@ -207,8 +237,7 @@ if __name__ == "__main__":
           <a
             href="https://github.com/Algoritma-dan-Pemrograman-ITS/Camin-2026/blob/main/Materi%203/index.html"
             target="_blank"
-            rel="noreferrer"
-          >
+            rel="noreferrer">
             index.html template (GitHub)
           </a>
         </li>
@@ -217,8 +246,8 @@ if __name__ == "__main__":
       <H2>Running the Application</H2>
       <ol>
         <li>
-          Make sure your folder contains three main files:{" "}
-          <code>main.py</code>, <code>index.html</code>, and <code>.env</code>.
+          Make sure your folder contains three main files: <code>main.py</code>,{" "}
+          <code>index.html</code>, and <code>.env</code>.
         </li>
         <li>Start the server from the terminal with:</li>
       </ol>
@@ -233,7 +262,7 @@ if __name__ == "__main__":
         </li>
       </ol>
       <Figure
-        src="https://github.com/user-attachments/assets/45e3a97c-a1b1-4e87-ba18-61fe3c44f041"
+        src="/app-result-modul-2.webp"
         alt="The running chatbot web interface in the browser."
         caption="The running chatbot, served by FastAPI at localhost:8000."
         maxWidth={480}
@@ -247,7 +276,8 @@ if __name__ == "__main__":
       <H2>Mini Quiz</H2>
       <p>
         Test your understanding of this module. Pick an answer to get instant
-        feedback, then see your score at the end — you can redo the quiz anytime.
+        feedback, then see your score at the end — you can redo the quiz
+        anytime.
       </p>
       <Quiz questions={modul2Quiz} />
     </DocArticle>
