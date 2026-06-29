@@ -7,12 +7,12 @@ export default function HomePage() {
     <DocArticle
       href="/"
       eyebrow="Getting Started"
-      title="Welcome to the RAG Workshop"
-      lead="A hands-on guide to building an AI chatbot that can read your own documents — starting from how Large Language Models work, all the way to a working Retrieval-Augmented Generation (RAG) application powered by Google Gemini."
+      title="Welcome to the RAG Workshop👋"
+      lead="A hands-on guide to building an AI chatbot that can read your own documents, starting from how Large Language Models work, all the way to a working Retrieval-Augmented Generation (RAG) application powered by SENOPATI."
     >
       <p>
         This is the official material for the <strong>AI / RAG Workshop</strong>{" "}
-        delivered by AP Lab. Every section is designed to be followed in order
+        delivered by Algorithm and Programming Lab. Every section is designed to be followed in order
         during the live session, while also serving as a reference you can
         revisit afterwards.
       </p>
@@ -20,12 +20,12 @@ export default function HomePage() {
         By the end of the workshop you will have built a real{" "}
         <strong>document-aware chatbot</strong>: upload a PDF (for example an
         academic handbook or a lecture module) and ask questions about it in
-        plain language — and get answers grounded in that document.
+        plain language and get answers grounded in that document.
       </p>
 
       <Callout type="note" title="What you will build">
         A small <strong>FastAPI</strong> web application with a chat interface,
-        connected to <strong>Google Gemini</strong>, that upgrades step by step
+        connected to <strong>SENOPATI</strong>, that upgrades step by step
         into a full RAG system using <strong>ChromaDB</strong> and a local
         embedding model.
       </Callout>
@@ -75,7 +75,7 @@ export default function HomePage() {
           <tr>
             <td>Build a chatbot</td>
             <td>
-              Connect to the Google Gemini API and serve a chat UI with FastAPI.
+              Connect to the SENOPATI API and serve a chat UI with FastAPI.
             </td>
           </tr>
           <tr>
@@ -140,8 +140,8 @@ export default function HomePage() {
         />
         <Card
           eyebrow="Module 2"
-          title="Building a Chatbot with Gemini"
-          description="Get a Gemini API key and serve a chat app with FastAPI."
+          title="Building a Chatbot with SENOPATI"
+          description="Get a SENOPATI API key and serve a chat app with FastAPI."
           href="/modul-2"
         />
         <Card
