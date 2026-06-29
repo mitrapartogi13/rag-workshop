@@ -15,8 +15,7 @@ export default function Modul1Page() {
       href="/modul-1"
       eyebrow="Workshop Modules"
       title="Module 1: LLM & Knowledge Injection"
-      lead="Understand what a Large Language Model is, and the three main ways to give it new knowledge — the foundation for everything we build later."
-    >
+      lead="Understand what a Large Language Model is, and the three main ways to give it new knowledge — the foundation for everything we build later.">
       <H2>Introduction to LLMs</H2>
       <p>
         Do you know ChatGPT, Gemini, and Claude? These are all examples of{" "}
@@ -51,16 +50,16 @@ export default function Modul1Page() {
         you want.
       </p>
       <p>
-        The easiest way to demonstrate this is to ask about a specific curriculum
-        rule that is probably <em>not</em> in the LLM&apos;s general training
-        data.
+        The easiest way to demonstrate this is to ask about a specific
+        curriculum rule that is probably <em>not</em> in the LLM&apos;s general
+        training data.
       </p>
 
       <p>
         <strong>1. Without knowledge injection (a plain prompt)</strong>
       </p>
       <Figure
-        src="https://github.com/user-attachments/assets/094a621c-eca1-407d-b6c5-83692599772a"
+        src="/plain-prompt.jpeg"
         alt="An LLM answering a curriculum question without injected context, giving a vague or generic response."
         caption="Without injected context, the model can only give a vague, generic answer."
         maxWidth={721}
@@ -105,8 +104,8 @@ export default function Modul1Page() {
       <blockquote>
         <p>
           <strong>User:</strong> &quot;Determine the sentiment of the following
-          sentence: &lsquo;The service at this restaurant was very satisfying and
-          the food was delicious.&rsquo;&quot;
+          sentence: &lsquo;The service at this restaurant was very satisfying
+          and the food was delicious.&rsquo;&quot;
         </p>
         <p>
           <strong>LLM:</strong> &quot;The sentiment of the sentence is
@@ -141,8 +140,8 @@ export default function Modul1Page() {
 
       <H3>Few-shot Prompting</H3>
       <p>
-        A technique where we provide <strong>several examples</strong> (usually 2
-        to 5 or more). This is highly recommended for tasks with complex
+        A technique where we provide <strong>several examples</strong> (usually
+        2 to 5 or more). This is highly recommended for tasks with complex
         patterns, or when we want the LLM to adopt an unusual format or
         classification style.
       </p>
@@ -175,7 +174,7 @@ export default function Modul1Page() {
         university website) and providing it to the LLM as context.
       </p>
       <Figure
-        src="https://github.com/user-attachments/assets/56a594e1-617c-4233-b08f-be995e93c222"
+        src="/rag-flow.webp"
         alt="Diagram of the Retrieval-Augmented Generation flow: a user question retrieves relevant data, which is combined into a prompt for the LLM."
         caption="The RAG flow: retrieve relevant data, combine it into the prompt, then let the LLM answer."
       />
@@ -184,34 +183,40 @@ export default function Modul1Page() {
       </p>
       <ol>
         <li>
-          <strong>User asks:</strong> &quot;What are the prerequisites for taking
-          the Web Programming course in Informatics Engineering?&quot;
+          <strong>User asks:</strong> &quot;What are the prerequisites for
+          taking the Web Programming course in Informatics Engineering?&quot;
         </li>
         <li>
           <strong>RAG system:</strong> searches for the keyword &quot;Web
           Programming&quot; in the latest curriculum PDF.
         </li>
         <li>
-          <strong>Prompt assembly:</strong> the system combines the search result
-          into a prompt — <em>&quot;Use the following information to answer:
-          [Data from PDF: The Web Programming course (IF234202) can be taken if a
-          student has passed Introduction to Programming with a minimum grade of
-          C and is currently taking or has taken Data Structures]. Question: What
-          are the prerequisites for taking Web Programming?&quot;</em>
+          <strong>Prompt assembly:</strong> the system combines the search
+          result into a prompt —{" "}
+          <em>
+            &quot;Use the following information to answer: [Data from PDF: The
+            Web Programming course (IF234202) can be taken if a student has
+            passed Introduction to Programming with a minimum grade of C and is
+            currently taking or has taken Data Structures]. Question: What are
+            the prerequisites for taking Web Programming?&quot;
+          </em>
         </li>
         <li>
-          <strong>LLM answers:</strong> &quot;Based on the latest curriculum, the
-          prerequisites for Web Programming are: having passed Introduction to
-          Programming with a minimum grade of C, and currently taking or having
-          taken Data Structures.&quot;
+          <strong>LLM answers:</strong> &quot;Based on the latest curriculum,
+          the prerequisites for Web Programming are: having passed Introduction
+          to Programming with a minimum grade of C, and currently taking or
+          having taken Data Structures.&quot;
         </li>
       </ol>
       <Callout type="note" title="Without RAG">
-        The LLM might instead answer: <em>&quot;I don&apos;t have specific
-        information about the detailed 2023 Informatics curriculum. Advanced
-        courses usually require Algorithms and Data Structures, but please check
-        the official academic handbook to be sure.&quot;</em> — helpful, but
-        vague and not grounded in your document.
+        The LLM might instead answer:{" "}
+        <em>
+          &quot;I don&apos;t have specific information about the detailed 2023
+          Informatics curriculum. Advanced courses usually require Algorithms
+          and Data Structures, but please check the official academic handbook
+          to be sure.&quot;
+        </em>{" "}
+        — helpful, but vague and not grounded in your document.
       </Callout>
 
       <H3>Fine-tuning</H3>
@@ -220,7 +225,8 @@ export default function Modul1Page() {
         using our own specific dataset. Unlike prompt engineering or RAG, which
         only provide &quot;short-term memory&quot; through context, fine-tuning{" "}
         <strong>permanently changes the model&apos;s neural weights</strong>{" "}
-        (long-term memory) so it adopts a new style, format, or knowledge domain.
+        (long-term memory) so it adopts a new style, format, or knowledge
+        domain.
       </p>
       <p>
         <strong>Real-world industry examples:</strong>
@@ -229,25 +235,25 @@ export default function Modul1Page() {
         <li>
           <strong>Legal / Medical assistants.</strong> General LLMs are good at
           summarising text but often imprecise with highly specific legal or
-          medical jargon. Law firms and healthcare institutions fine-tune LLMs on
-          hundreds of thousands of their own contracts or historical medical
-          records. The result handles advanced terminology and produces drafts in
-          the exact professional style of that organisation.
+          medical jargon. Law firms and healthcare institutions fine-tune LLMs
+          on hundreds of thousands of their own contracts or historical medical
+          records. The result handles advanced terminology and produces drafts
+          in the exact professional style of that organisation.
         </li>
         <li>
-          <strong>Customer service with a brand persona.</strong> Large companies
-          want their AI to answer with their own tone of voice, not like a stiff
-          robot. They fine-tune on millions of chat logs from their best human
-          agents, so the model naturally shows empathy and offers solutions in
-          the company&apos;s standard style.
+          <strong>Customer service with a brand persona.</strong> Large
+          companies want their AI to answer with their own tone of voice, not
+          like a stiff robot. They fine-tune on millions of chat logs from their
+          best human agents, so the model naturally shows empathy and offers
+          solutions in the company&apos;s standard style.
         </li>
       </ul>
 
       <H3>When to choose Fine-tuning over RAG?</H3>
       <p>
         Choose <strong>fine-tuning</strong> when you want to change the{" "}
-        <em>language style, response format, or instill a certain pattern</em> in
-        the LLM. Choose <strong>RAG</strong> when you simply need the LLM to{" "}
+        <em>language style, response format, or instill a certain pattern</em>{" "}
+        in the LLM. Choose <strong>RAG</strong> when you simply need the LLM to{" "}
         <em>access up-to-date facts</em> (like schedules and curriculum rules)
         without the expense of retraining the model every term.
       </p>
@@ -285,12 +291,13 @@ export default function Modul1Page() {
       <Callout type="tip" title="Next up">
         We will use <strong>prompt engineering</strong> first to build a working
         chatbot, then add <strong>RAG</strong> on top of it. Continue to{" "}
-        <a href="/modul-2">Module 2: Building a Chatbot with Gemini</a>.
+        <a href="/modul-2">Module 2: Building a Chatbot with SENOPATI</a>.
       </Callout>
       <H2>Mini Quiz</H2>
       <p>
         Test your understanding of this module. Pick an answer to get instant
-        feedback, then see your score at the end — you can redo the quiz anytime.
+        feedback, then see your score at the end — you can redo the quiz
+        anytime.
       </p>
       <Quiz questions={modul1Quiz} />
     </DocArticle>
