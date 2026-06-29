@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MobileNav } from "@/components/mobile-nav";
 import { GitHubIcon, SearchIcon } from "@/components/icons";
+import AlproLogo from "@/public/Logo-Alpro ITS.webp";
 
 const GITHUB_URL = "https://github.com/mitrapartogi13/rag-workshop.git";
 
@@ -17,9 +19,12 @@ export function SiteHeader() {
           <MobileNav />
 
           <Link href="/" className="flex items-center gap-2.5">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-slate-900 text-[0.7rem] font-bold text-white">
-              AP
-            </span>
+            <Image
+              src={AlproLogo}
+              alt="Logo Alpro ITS"
+              className="h-12 w-12 object-contain"
+              priority
+            />
             <span className="flex items-baseline gap-2">
               <span className="text-sm font-semibold text-slate-900">
                 AP Lab
@@ -37,8 +42,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer"
               className="inline-flex h-12 w-12 items-center justify-center rounded-md text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
-              aria-label="GitHub repository"
-            >
+              aria-label="GitHub repository">
               <GitHubIcon className="h-8 w-8" />
             </a>
           </div>
