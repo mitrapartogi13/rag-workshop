@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s — RAG Workshop",
   },
   description:
-    "Retrieval-Augmented Generation (RAG) workshop documentation: from LLM fundamentals and knowledge injection to building a document-aware chatbot with Gemini and ChromaDB. Hosted by AP Lab.",
+    "Retrieval-Augmented Generation (RAG) workshop documentation: from LLM fundamentals and knowledge injection to building a document-aware chatbot with SENOPATI and ChromaDB. Hosted by AP Lab.",
 };
 
 export default function RootLayout({
@@ -74,13 +74,9 @@ function SiteFooter() {
     <footer className="mt-8 border-t border-slate-200">
       <div className="mx-auto flex max-w-8xl flex-col items-start justify-between gap-3 px-4 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:px-6 lg:px-8">
         <p>
-          © {new Date().getFullYear()} AP Lab — RAG Workshop materials,
-          Timor-Leste.
+          © {new Date().getFullYear()} AP Lab — RAG Workshop materials.
         </p>
         <div className="flex items-center gap-5">
-          <Link href="/modul-1" className="hover:text-slate-900">
-            Modules
-          </Link>
           <a
             href="https://github.com/mitrapartogi13/rag-workshop"
             target="_blank"

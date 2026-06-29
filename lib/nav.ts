@@ -40,8 +40,8 @@ export const navGroups: NavGroup[] = [
         href: "/modul-1",
       },
       {
-        title: "Module 2: Building a Chatbot with Gemini",
-        navLabel: "2. Chatbot with Gemini",
+        title: "Module 2: Building a Chatbot with SENOPATI",
+        navLabel: "2. Chatbot with SENOPATI",
         href: "/modul-2",
       },
       {
