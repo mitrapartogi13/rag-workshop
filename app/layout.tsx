@@ -25,6 +25,11 @@ export const metadata: Metadata = {
   },
   description:
     "Retrieval-Augmented Generation (RAG) workshop documentation: from LLM fundamentals and knowledge injection to building a document-aware chatbot with SENOPATI and ChromaDB. Hosted by AP Lab.",
+  icons: {
+    icon: "/Logo-Alpro ITS.webp",
+    shortcut: "/Logo-Alpro ITS.webp",
+    apple: "/Logo-Alpro ITS.webp",
+  },
 };
 
 export default function RootLayout({

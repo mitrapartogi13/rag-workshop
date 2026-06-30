@@ -26,16 +26,6 @@ export default function Modul2Page() {
       <H2>Getting a SENOPATI API Key</H2>
 
       <H3>Wait for the instructor to give you the API Key :)</H3>
-      <p>
-        Open your browser and go to{" "}
-        <a
-          href="https://aistudio.google.com/app/apikey"
-          target="_blank"
-          rel="noreferrer">
-          Google AI Studio
-        </a>
-        .
-      </p>
       <Callout type="warning" title="Keep your key secret">
         An API key is a credential. Never commit it to a public repository and
         never paste it directly into shared code. We will store it in a separate{" "}
@@ -50,14 +40,17 @@ export default function Modul2Page() {
 
       <H3>Install Python</H3>
       <p>
-        Check whether it&apos;s already available by opening a terminal
-        (in VS Code: <strong>Terminal &gt; New Terminal</strong>) and running:
+        Check whether it&apos;s already available by opening a terminal (in VS
+        Code: <strong>Terminal &gt; New Terminal</strong>) and running:
       </p>
       <CodeBlock lang="bash" code={`python --version`} />
       <p>
         If you see an error instead of a version number (e.g.{" "}
         <code>3.11.x</code>), download and install Python from{" "}
-        <a href="https://www.python.org/downloads/" target="_blank" rel="noreferrer">
+        <a
+          href="https://www.python.org/downloads/"
+          target="_blank"
+          rel="noreferrer">
           python.org/downloads
         </a>
         . On Windows, make sure to check{" "}
@@ -73,30 +66,28 @@ export default function Modul2Page() {
         lang="bash"
         code={`pip install fastapi uvicorn requests pydantic python-dotenv`}
       />
-      <p>
-        Here&apos;s what each library is for:
-      </p>
+      <p>Here&apos;s what each library is for:</p>
       <ul>
         <li>
-          <code>fastapi</code> — the web framework used to build the{" "}
+          <code>fastapi</code> : the web framework used to build the{" "}
           <code>/chat</code> API endpoint and serve the page.
         </li>
         <li>
-          <code>uvicorn</code> — the ASGI server that actually runs the
-          FastAPI app (called via <code>uvicorn.run(...)</code>).
+          <code>uvicorn</code> : the ASGI server that actually runs the FastAPI
+          app (called via <code>uvicorn.run(...)</code>).
         </li>
         <li>
-          <code>requests</code> — used to send the HTTP request to the
-          SENOPATI gateway from the <code>/chat</code> endpoint.
+          <code>requests</code> : used to send the HTTP request to the SENOPATI
+          gateway from the <code>/chat</code> endpoint.
         </li>
         <li>
-          <code>pydantic</code> — provides <code>BaseModel</code>, used to
+          <code>pydantic</code> : provides <code>BaseModel</code>, used to
           validate the incoming chat request body.
         </li>
         <li>
-          <code>python-dotenv</code> — loads variables from the{" "}
-          <code>.env</code> file (via <code>load_dotenv()</code>) so the API
-          key and model settings stay out of the code.
+          <code>python-dotenv</code> : loads variables from the{" "}
+          <code>.env</code> file (via <code>load_dotenv()</code>) so the API key
+          and model settings stay out of the code.
         </li>
       </ul>
 
@@ -252,7 +243,7 @@ if __name__ == "__main__":
       <H2>Mini Quiz</H2>
       <p>
         Test your understanding of this module. Pick an answer to get instant
-        feedback, then see your score at the end — you can redo the quiz
+        feedback, then see your score at the end. You can redo the quiz anytime.
         anytime.
       </p>
       <Quiz questions={modul2Quiz} />

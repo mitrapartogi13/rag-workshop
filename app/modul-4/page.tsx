@@ -16,7 +16,7 @@ export default function Modul4Page() {
       href="/modul-4"
       eyebrow="Workshop Modules"
       title="Module 4: Building the RAG Pipeline"
-      lead="Turn your chatbot into a document-aware assistant. We build it in three parts — store, retrieve, and generation — testing each part before moving on.">
+      lead="Turn your chatbot into a document-aware assistant. We build it in three parts: store, retrieve, and generation, testing each part before moving on.">
       <p>
         We will implement RAG on top of the chatbot from Module 2, in the order:{" "}
         <strong>store</strong> the PDF, <strong>retrieve</strong> relevant
@@ -108,7 +108,7 @@ def process_pdf(file_bytes: bytes) -> int:
         Open <code>main.py</code> and make three changes.
       </p>
       <p>
-        <strong>Change 1 — update the import line</strong> (replace{" "}
+        <strong>Change 1: update the import line</strong> (replace{" "}
         <code>from fastapi import FastAPI, Request</code>):
       </p>
       <CodeBlock
@@ -116,7 +116,7 @@ def process_pdf(file_bytes: bytes) -> int:
         code={`from fastapi import FastAPI, Request, UploadFile, File`}
       />
       <p>
-        <strong>Change 2 — import from rag.py</strong> (add at the bottom of the
+        <strong>Change 2: import from rag.py</strong> (add at the bottom of the
         import section):
       </p>
       <CodeBlock
@@ -124,7 +124,7 @@ def process_pdf(file_bytes: bytes) -> int:
         code={`from rag import process_pdf, has_documents`}
       />
       <p>
-        <strong>Change 3 — add the /upload endpoint</strong> (add it after the{" "}
+        <strong>Change 3: add the /upload endpoint</strong> (add it after the{" "}
         <code>get_index</code> function, before the <code>chat</code> function):
       </p>
       <CodeBlock
@@ -170,8 +170,56 @@ async def upload_pdf(file: UploadFile = File(...)):
         <a href="/viewer.py" download>
           viewer.py
         </a>{" "}
-        script.
+        script, a small Streamlit app that reads the same{" "}
+        <code>chroma_db/</code> folder your server just created.
       </p>
+
+      <H3>Run the viewer</H3>
+      <p>
+        Download <code>viewer.py</code> into the same project folder as{" "}
+        <code>main.py</code> (it needs to see the{" "}
+        <code>chroma_db/</code> folder next to it). Install Streamlit, then
+        launch it:
+      </p>
+      <CodeBlock lang="bash" code={`pip install streamlit`} />
+      <CodeBlock lang="bash" code={`streamlit run viewer.py`} />
+      <p>
+        This opens a new tab in your browser (usually at{" "}
+        <a href="http://localhost:8501" target="_blank" rel="noreferrer">
+          http://localhost:8501
+        </a>
+        ). It is a separate app from your chatbot, so keep <code>main.py</code>{" "}
+        running in its own terminal and run this command in a second terminal.
+      </p>
+
+      <H3>What you will see</H3>
+      <ul>
+        <li>
+          <strong>Overview</strong>: total chunk count and a preview of the
+          first five chunks, so you can confirm something was actually
+          stored.
+        </li>
+        <li>
+          <strong>Browse</strong>: every stored chunk, paginated, with a text
+          filter to jump straight to a section of your PDF.
+        </li>
+        <li>
+          <strong>Semantic Search</strong>: run the same kind of query your
+          chatbot runs internally and see which chunks come back, with a
+          similarity score for each.
+        </li>
+        <li>
+          <strong>Manage</strong>: delete all chunks from the selected
+          collection, useful for resetting your knowledge base without
+          touching files manually.
+        </li>
+      </ul>
+      <Callout type="tip" title="Why bother">
+        The viewer is optional, but it turns retrieval from a black box into
+        something you can see. If a chatbot answer looks wrong, check{" "}
+        <strong>Semantic Search</strong> first: if the right chunk is not in
+        the results, the problem is in retrieval, not the LLM.
+      </Callout>
 
       <H2>The Retrieve: Finding Relevant Chunks</H2>
       <p>
@@ -448,7 +496,7 @@ if __name__ == "__main__":
       <H2>Mini Quiz</H2>
       <p>
         Test your understanding of this module. Pick an answer to get instant
-        feedback, then see your score at the end — you can redo the quiz
+        feedback, then see your score at the end. You can redo the quiz anytime.
         anytime.
       </p>
       <Quiz questions={modul4Quiz} />

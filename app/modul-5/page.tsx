@@ -16,12 +16,12 @@ export default function Modul5Page() {
       href="/modul-5"
       eyebrow="Workshop Modules"
       title="Module 5: Hands-on Session"
-      lead="Your turn. Build, run, and demo your own document-aware chatbot end to end — with a recap of the moving parts, common errors, and challenges to push further."
-    >
+      lead="Your turn. Build, run, and demo your own document-aware chatbot end to end, with a recap of the moving parts, common errors, and challenges to push further.">
       <p>
         This is the practical session. Instead of reading along, you will{" "}
-        <strong>build</strong>. The goal is clear: by the end, you have a working
-        RAG chatbot that answers questions based on a document of your choice.
+        <strong>build</strong>. The goal is clear: by the end, you have a
+        working RAG chatbot that answers questions based on a document of your
+        choice.
       </p>
 
       <Callout type="note" title="Session format">
@@ -116,12 +116,12 @@ pip install langchain-community langchain-text-splitters pypdf chromadb sentence
       <p>Work through these tasks to confirm your RAG system really works:</p>
       <ul>
         <li>
-          Upload a PDF of your choice — a handbook, lecture notes, or a short
+          Upload a PDF of your choice: a handbook, lecture notes, or a short
           paper.
         </li>
         <li>
-          Ask <strong>three questions</strong> that can be answered from the PDF,
-          and check that the answers match the document.
+          Ask <strong>three questions</strong> that can be answered from the
+          PDF, and check that the answers match the document.
         </li>
         <li>
           Ask <strong>one question that is not</strong> in the PDF, and observe
@@ -140,7 +140,9 @@ pip install langchain-community langchain-text-splitters pypdf chromadb sentence
       </Callout>
 
       <H2>Troubleshooting</H2>
-      <p>The most common issues during the hands-on session, and how to fix them:</p>
+      <p>
+        The most common issues during the hands-on session, and how to fix them:
+      </p>
       <table>
         <thead>
           <tr>
@@ -175,12 +177,16 @@ pip install langchain-community langchain-text-splitters pypdf chromadb sentence
           <tr>
             <td>&quot;File must be a PDF&quot;</td>
             <td>You uploaded a non-PDF file.</td>
-            <td>Upload a real <code>.pdf</code> file.</td>
+            <td>
+              Upload a real <code>.pdf</code> file.
+            </td>
           </tr>
           <tr>
             <td>Answers ignore the PDF</td>
             <td>No documents stored, or retrieval found nothing useful.</td>
-            <td>Upload first; rephrase the question to match the PDF wording.</td>
+            <td>
+              Upload first; rephrase the question to match the PDF wording.
+            </td>
           </tr>
           <tr>
             <td>
@@ -193,31 +199,69 @@ pip install langchain-community langchain-text-splitters pypdf chromadb sentence
       </table>
 
       <H2>Extension Challenges</H2>
-      <p>Finished early? Push your project further:</p>
-      <ul>
-        <li>
-          <strong>Show sources.</strong> Return the page numbers of the chunks
-          used, so each answer can be traced back to the PDF.
-        </li>
-        <li>
-          <strong>Multiple documents.</strong> Allow uploading several PDFs and
-          searching across all of them.
-        </li>
-        <li>
-          <strong>Tune retrieval.</strong> Experiment with <code>chunk_size</code>,{" "}
-          <code>chunk_overlap</code>, and <code>top_k</code> and observe how the
-          answers change.
-        </li>
-        <li>
-          <strong>Add a reset button.</strong> Create a <code>/reset</code>{" "}
-          endpoint that clears the ChromaDB collection without deleting files
-          manually.
-        </li>
-        <li>
-          <strong>Change the persona.</strong> Replace the Competitive
-          Programming personality with one that fits your own use case.
-        </li>
-      </ul>
+      <p>
+        This is the core of the hands-on session, not optional bonus work.
+        Pick <strong>at least two</strong> challenges and implement them in
+        your own project; mix an easy one with a harder one if you are unsure
+        where to start.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Challenge</th>
+            <th>Difficulty</th>
+            <th>~Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Change the persona.</strong> Replace the Competitive
+              Programming personality with one that fits your own use case.
+            </td>
+            <td>Easy</td>
+            <td>10 to 15 min</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Add a reset button.</strong> Create a{" "}
+              <code>/reset</code> endpoint that clears the ChromaDB collection
+              without deleting files manually.
+            </td>
+            <td>Easy</td>
+            <td>15 to 20 min</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Tune retrieval.</strong> Experiment with{" "}
+              <code>chunk_size</code>, <code>chunk_overlap</code>, and{" "}
+              <code>top_k</code> and observe how the answers change.
+            </td>
+            <td>Medium</td>
+            <td>20 to 30 min</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Show sources.</strong> Return the page numbers of the
+              chunks used, so each answer can be traced back to the PDF.
+            </td>
+            <td>Medium</td>
+            <td>25 to 35 min</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Multiple documents.</strong> Allow uploading several
+              PDFs and searching across all of them.
+            </td>
+            <td>Hard</td>
+            <td>30 to 45 min</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Already used the viewer in Module 4? Re-run it after each challenge to
+        confirm your changes actually affected what is stored or retrieved.
+      </p>
 
       <H2>Completion Checklist</H2>
       <p>Before the demo, make sure your project meets these criteria:</p>
@@ -225,20 +269,21 @@ pip install langchain-community langchain-text-splitters pypdf chromadb sentence
         <li>The chatbot loads and indexes a document without errors.</li>
         <li>Answers are relevant to the contents of the document.</li>
         <li>
-          The bot behaves reasonably when the information is not in the document.
+          The bot behaves reasonably when the information is not in the
+          document.
         </li>
         <li>The code is tidy and can be run again from scratch.</li>
       </ul>
 
       <Callout type="note" title="Congratulations!">
-        You have completed the workshop — from understanding LLMs and knowledge
+        You have completed the workshop, from understanding LLMs and knowledge
         injection all the way to a working, document-aware RAG chatbot. Keep
         experimenting and build something useful!
       </Callout>
       <H2>Mini Quiz</H2>
       <p>
-        A final check before you go. Pick an answer to get instant feedback, then
-        see your score at the end — you can redo the quiz anytime.
+        A final check before you go. Pick an answer to get instant feedback,
+        then see your score at the end. You can redo the quiz anytime.
       </p>
       <Quiz questions={modul5Quiz} />
     </DocArticle>

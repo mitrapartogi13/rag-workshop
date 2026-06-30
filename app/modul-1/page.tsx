@@ -15,7 +15,7 @@ export default function Modul1Page() {
       href="/modul-1"
       eyebrow="Workshop Modules"
       title="Module 1: LLM & Knowledge Injection"
-      lead="Understand what a Large Language Model is, and the three main ways to give it new knowledge — the foundation for everything we build later.">
+      lead="Understand what a Large Language Model is, and the three main ways to give it new knowledge, which forms the foundation for everything we build later.">
       <H2>Introduction to LLMs</H2>
       <p>
         Do you know ChatGPT, Gemini, and Claude? These are all examples of{" "}
@@ -33,9 +33,9 @@ export default function Modul1Page() {
       <H2>Knowledge Injection</H2>
       <p>
         Before building a chatbot, we need to understand the concept of{" "}
-        <strong>knowledge injection</strong> — a set of techniques for giving an
+        <strong>knowledge injection</strong>: a set of techniques for giving an
         LLM additional knowledge to improve how it understands and generates
-        text. There are three main types:
+        text.
       </p>
       <ul>
         <li>Prompt Engineering</li>
@@ -192,7 +192,8 @@ export default function Modul1Page() {
         </li>
         <li>
           <strong>Prompt assembly:</strong> the system combines the search
-          result into a prompt —{" "}
+          result into a prompt:{" "}
+          <em>&quot;Use the following information to answer...</em>
           <em>
             &quot;Use the following information to answer: [Data from PDF: The
             Web Programming course (IF234202) can be taken if a student has
@@ -216,7 +217,7 @@ export default function Modul1Page() {
           and Data Structures, but please check the official academic handbook
           to be sure.&quot;
         </em>{" "}
-        — helpful, but vague and not grounded in your document.
+        (This is helpful, but vague and not grounded in your document).
       </Callout>
 
       <H3>Fine-tuning</H3>
@@ -296,8 +297,7 @@ export default function Modul1Page() {
       <H2>Mini Quiz</H2>
       <p>
         Test your understanding of this module. Pick an answer to get instant
-        feedback, then see your score at the end — you can redo the quiz
-        anytime.
+        feedback, then see your score at the end. You can redo the quiz anytime.
       </p>
       <Quiz questions={modul1Quiz} />
     </DocArticle>
