@@ -87,14 +87,14 @@ PDF -> split into chunks -> each chunk becomes a vector -> store in ChromaDB
 
 [WHEN THE USER CHATS]
 User question -> turn into a vector -> find the most similar chunks in ChromaDB
--> combine chunks into the prompt -> send to Gemini -> answer`}
+-> combine chunks into the prompt -> send to SENOPATI -> answer`}
       />
 
       <H2>Final File Structure</H2>
       <p>After all the steps are done, your project folder will contain:</p>
       <CodeBlock
         lang="text"
-        code={`Materi 3/
+        code={`RAG Workshop/
 ├── main.py          <- backend (modified)
 ├── rag.py           <- RAG logic (new file)
 ├── index.html       <- frontend (modified)
