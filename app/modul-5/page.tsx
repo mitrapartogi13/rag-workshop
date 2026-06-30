@@ -73,7 +73,7 @@ export default function Modul5Page() {
             <td>
               <code>.env</code>
             </td>
-            <td>Stores your GEMINI_API_KEY.</td>
+            <td>Stores your SENOPATI_API_KEY and gateway settings.</td>
             <td>Module 2</td>
           </tr>
           <tr>
@@ -91,13 +91,13 @@ export default function Modul5Page() {
       <ol>
         <li>
           Create the project folder and the <code>.env</code> file with your
-          Gemini API key (<a href="/modul-2">Module 2</a>).
+          SENOPATI API key (<a href="/modul-2">Module 2</a>).
         </li>
         <li>Install all dependencies:</li>
       </ol>
       <CodeBlock
         lang="bash"
-        code={`pip install fastapi uvicorn google-genai python-dotenv
+        code={`pip install fastapi uvicorn requests pydantic python-dotenv
 pip install langchain-community langchain-text-splitters pypdf chromadb sentence-transformers python-multipart`}
       />
       <ol start={3}>
@@ -166,7 +166,7 @@ pip install langchain-community langchain-text-splitters pypdf chromadb sentence
             <td>
               <code>Internal Error</code> about the API key
             </td>
-            <td>Missing or wrong GEMINI_API_KEY.</td>
+            <td>Missing or wrong SENOPATI_API_KEY.</td>
             <td>
               Check <code>.env</code> (no quotes, no spaces) and that the key is
               valid.

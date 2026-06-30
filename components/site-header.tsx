@@ -54,7 +54,7 @@ export function SiteHeader() {
 
 /**
  * Search affordance styled as a faux input. Functional search is out of scope
- * for the workshop site, so this is a calm placeholder with a keyboard hint —
+ * for the workshop site, so this is a calm placeholder with a keyboard hint,
  * exactly how the Tailwind docs present their search trigger.
  */
 // function SearchBar() {

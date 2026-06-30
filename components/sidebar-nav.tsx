@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 /**
  * Left-hand navigation: categories rendered as uppercase eyebrows, each with
  * a vertical rule down the link list. The active link picks up the rule in
- * sky and turns the text sky/semibold — a subtle, borrowed-from-Tailwind cue.
+ * sky and turns the text sky/semibold, a subtle, borrowed-from-Tailwind cue.
  *
  * `onNavigate` lets the mobile drawer close itself after a selection.
  */

@@ -10,7 +10,7 @@ type Heading = { id: string; text: string; level: number };
  * Right-hand "On this page" table of contents.
  *
  * Rather than threading heading metadata through props, we read the rendered
- * DOM after each navigation — every H2/H3 emitted by the content components
+ * DOM after each navigation; every H2/H3 emitted by the content components
  * carries an id, so we collect those and track which section is currently in
  * view with a lightweight scroll listener.
  */

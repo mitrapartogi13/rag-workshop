@@ -16,8 +16,7 @@ export default function Modul4Page() {
       href="/modul-4"
       eyebrow="Workshop Modules"
       title="Module 4: Building the RAG Pipeline"
-      lead="Turn the Gemini chatbot into a document-aware assistant. We build it in three parts — store, retrieve, and generation — testing each part before moving on."
-    >
+      lead="Turn your chatbot into a document-aware assistant. We build it in three parts — store, retrieve, and generation — testing each part before moving on.">
       <p>
         We will implement RAG on top of the chatbot from Module 2, in the order:{" "}
         <strong>store</strong> the PDF, <strong>retrieve</strong> relevant
@@ -36,9 +35,9 @@ export default function Modul4Page() {
 
       <H3>Create rag.py (the store part)</H3>
       <p>
-        Create a new file named <code>rag.py</code>. For now we only fill it with
-        the functions related to <strong>storage</strong>. The retrieve function
-        will be added later.
+        Create a new file named <code>rag.py</code>. For now we only fill it
+        with the functions related to <strong>storage</strong>. The retrieve
+        function will be added later.
       </p>
       <CodeBlock
         lang="python"
@@ -52,22 +51,17 @@ from sentence_transformers import SentenceTransformer
 
 COLLECTION_NAME = "documents"
 
-# Global variables so the model and DB connection are not reloaded every time
-_model = None
+_model: SentenceTransformer | None = None
 _client = None
 _collection = None
 
-
-def _get_model():
-    """Load the embedding model. Runs only once, then cached in _model."""
+def _get_model() -> SentenceTransformer:
     global _model
     if _model is None:
         _model = SentenceTransformer("all-MiniLM-L6-v2")
     return _model
 
-
 def _get_collection():
-    """Open a connection to ChromaDB. Runs only once, then cached in _client."""
     global _client, _collection
     if _client is None:
         chroma_path = os.getenv("CHROMA_PATH", "./chroma_db")
@@ -75,57 +69,38 @@ def _get_collection():
         _collection = _client.get_or_create_collection(COLLECTION_NAME)
     return _collection
 
-
-def has_documents():
-    """Return True if there are already documents stored in ChromaDB."""
+def has_documents() -> bool:
     return _get_collection().count() > 0
 
-
 def process_pdf(file_bytes: bytes) -> int:
-    """
-    Process a PDF file: read -> split -> embed -> store in ChromaDB.
-    Returns the number of chunks successfully stored.
-    """
-    # Write the PDF bytes to a temporary file because PyPDFLoader needs a path
     with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
         tmp.write(file_bytes)
         tmp_path = tmp.name
 
     try:
-        # Read the PDF into a list of pages
         loader = PyPDFLoader(tmp_path)
         pages = loader.load()
 
-        # Split the text into chunks of ~500 characters.
-        # chunk_overlap=50 means the last 50 characters of the previous chunk
-        # are repeated at the start of the next chunk, so context is not lost.
         splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
         chunks = splitter.split_documents(pages)
 
-        # Keep only the text of each chunk (drop empty ones)
         texts = [c.page_content for c in chunks if c.page_content.strip()]
         if not texts:
             return 0
 
-        # Turn all texts into vectors at once
         embeddings = _get_model().encode(texts).tolist()
-
-        # Create a unique ID for each chunk
         ids = [f"chunk_{abs(hash(text + str(i)))}" for i, text in enumerate(texts)]
 
-        # Store the text + vectors in ChromaDB
         _get_collection().add(documents=texts, embeddings=embeddings, ids=ids)
-
         return len(texts)
     finally:
-        # Always delete the temporary file, even if an error occurs
         os.unlink(tmp_path)`}
       />
       <Callout type="note" title="Why chunk_overlap?">
-        Imagine an important sentence getting cut exactly between two chunks. With
-        an overlap of 50 characters, the last 50 characters of the first chunk are
-        repeated at the start of the second chunk, so the context is not lost at
-        the boundary.
+        Imagine an important sentence getting cut exactly between two chunks.
+        With an overlap of 50 characters, the last 50 characters of the first
+        chunk are repeated at the start of the second chunk, so the context is
+        not lost at the boundary.
       </Callout>
 
       <H3>Add the /upload endpoint to main.py</H3>
@@ -171,9 +146,12 @@ async def upload_pdf(file: UploadFile = File(...)):
       <p>Start the server:</p>
       <CodeBlock lang="bash" code={`python main.py`} />
       <p>
-        Open <a href="http://localhost:8000" target="_blank" rel="noreferrer">http://localhost:8000</a>, click{" "}
-        <strong>&quot;Upload PDF&quot;</strong>, choose a PDF file, and wait for
-        the confirmation message:
+        Open{" "}
+        <a href="http://localhost:8000" target="_blank" rel="noreferrer">
+          http://localhost:8000
+        </a>
+        , click <strong>&quot;Upload PDF&quot;</strong>, choose a PDF file, and
+        wait for the confirmation message:
       </p>
       <CodeBlock
         lang="text"
@@ -189,11 +167,7 @@ async def upload_pdf(file: UploadFile = File(...)):
       <p>
         After uploading, how do we know the data was really stored? We can peek
         directly into ChromaDB using various tools. For now we will use the{" "}
-        <a
-          href="https://github.com/Algoritma-dan-Pemrograman-ITS/Camin-2026/blob/main/Materi%203/viewer.py"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href="/viewer.py" download>
           viewer.py
         </a>{" "}
         script.
@@ -201,9 +175,10 @@ async def upload_pdf(file: UploadFile = File(...)):
 
       <H2>The Retrieve: Finding Relevant Chunks</H2>
       <p>
-        Now we add the <strong>retrieve</strong> function to <code>rag.py</code>.
-        It is called every time the user sends a message; its job is to find the
-        most relevant chunks from ChromaDB based on the user&apos;s question.
+        Now we add the <strong>retrieve</strong> function to <code>rag.py</code>
+        . It is called every time the user sends a message; its job is to find
+        the most relevant chunks from ChromaDB based on the user&apos;s
+        question.
       </p>
 
       <H3>Add the retrieve function to rag.py</H3>
@@ -266,19 +241,19 @@ print(result)`}
       <CodeBlock lang="bash" code={`python test_retrieve.py`} />
       <p>
         If the output shows text snippets from the PDF that are relevant to the
-        question, the retrieval system works. If the results are not relevant, try
-        rephrasing the question to better match the PDF&apos;s content.
+        question, the retrieval system works. If the results are not relevant,
+        try rephrasing the question to better match the PDF&apos;s content.
       </p>
       <Callout type="tip" title="Cleanup">
-        <code>test_retrieve.py</code> is only for testing. You can delete it once
-        you are done.
+        <code>test_retrieve.py</code> is only for testing. You can delete it
+        once you are done.
       </Callout>
 
       <H2>The Generation: Connecting to the LLM</H2>
       <p>
-        This is the final step: feed the retrieval result to Gemini so the
-        chatbot&apos;s answers are <strong>based on the PDF contents</strong>, not
-        just the model&apos;s general knowledge.
+        This is the final step: feed the retrieval result to SENOPATI so the
+        chatbot&apos;s answers are <strong>based on the PDF contents</strong>,
+        not just the model&apos;s general knowledge.
       </p>
 
       <H3>Update the import in main.py</H3>
@@ -307,43 +282,57 @@ async def chat(request: ChatRequest):
             "Be as annoying as possible. Connect every single prompt to competitive programming.\\n"
             "Even a simple hello should be connected to competitive programming.\\n"
             "Act like you're trying to 'solve' the user's message, even if it's not a problem to solve.\\n"
-            "Please use standard LaTeX for math and Markdown for bolding.\\n"
+            "Please use standard LaTeX for math and Markdown for bolding."
         )
 
         user_msg = request.message
 
+        # RAG retrieval stage
         if has_documents():
             # RAG mode: documents are stored.
-            # Retrieve relevant chunks and insert them as context into the prompt.
+            # Retrieve the relevant chunks and inject them as context.
             context = retrieve(user_msg)
-            prompt = (
-                f"{personality}\\n"
-                f"Here is the relevant context from the document:\\n{context}\\n\\n"
-                f"Question: {user_msg}"
-            )
+            system_content = f"{personality}\\n\\nHere is the relevant context from the documents:\\n{context}"
         else:
-            # Fallback mode: no documents yet, use a plain prompt.
-            prompt = f"{personality}This is your next prompt: {user_msg}"
+            # Fallback mode: no documents yet, use the persona only.
+            system_content = personality
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
+        # Assemble the payload for the /v1/chat endpoint
+        payload = {
+            "model": MODEL_NAME,
+            "stream": False,
+            "messages": [
+                {"role": "system", "content": system_content},
+                {"role": "user", "content": user_msg}
+            ]
+        }
 
-        return {"response": response.text}
+        headers = {
+            "Authorization": f"Bearer {SENOPATI_API_KEY}",
+            "Content-Type": "application/json"
+        }
+
+        response = requests.post(SENOPATI_BASE_URL, json=payload, headers=headers)
+        response_data = response.json()
+
+        if response.status_code == 200:
+            ai_answer = response_data.get("message", {}).get("content", "")
+            return {"response": ai_answer}
+        else:
+            return {"response": f"API Error ({response.status_code}): {response_data}"}
     except Exception as e:
         print(f"CRITICAL ERROR: {e}")
         return {"response": f"Internal Error: {str(e)}"}`}
       />
       <p>
-        <strong>What changed?</strong> The <code>chat</code> function now has two
-        paths:
+        <strong>What changed?</strong> The <code>chat</code> function now has
+        two paths:
       </p>
       <CodeBlock
         lang="text"
         code={`Are there documents in ChromaDB?
-    |-- YES -> retrieve() -> combine into prompt -> send to LLM   [RAG MODE]
-    |__ NO  -> plain prompt -> send to LLM                        [FALLBACK MODE]`}
+    |-- YES -> retrieve() -> add chunks to the system message -> send to SENOPATI   [RAG MODE]
+    |__ NO  -> persona-only system message -> send to SENOPATI                      [FALLBACK MODE]`}
       />
       <p>
         The Competitive Programming personality stays in <strong>both</strong>{" "}
@@ -356,10 +345,10 @@ async def chat(request: ChatRequest):
         lang="python"
         filename="main.py"
         code={`import os
+import requests
 from fastapi import FastAPI, Request, UploadFile, File
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from google import genai
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from rag import process_pdf, retrieve, has_documents
@@ -376,15 +365,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-api_key_val = os.getenv("GEMINI_API_KEY")
-client = genai.Client(api_key=api_key_val)
+# Senopati Gateway configuration, read from .env
+SENOPATI_API_KEY = os.getenv("SENOPATI_API_KEY")
+SENOPATI_BASE_URL = os.getenv("SENOPATI_BASE_URL")
+MODEL_NAME = os.getenv("MODEL_NAME")
 
 class ChatRequest(BaseModel):
     message: str
 
 @app.get("/", response_class=HTMLResponse)
 async def get_index():
-    with open("index.html", "r") as f:
+    with open("index.html", "r", encoding="utf-8") as f:
         return f.read()
 
 @app.post("/upload")
@@ -408,27 +399,39 @@ async def chat(request: ChatRequest):
             "Be as annoying as possible. Connect every single prompt to competitive programming.\\n"
             "Even a simple hello should be connected to competitive programming.\\n"
             "Act like you're trying to 'solve' the user's message, even if it's not a problem to solve.\\n"
-            "Please use standard LaTeX for math and Markdown for bolding.\\n"
+            "Please use standard LaTeX for math and Markdown for bolding."
         )
 
         user_msg = request.message
 
         if has_documents():
             context = retrieve(user_msg)
-            prompt = (
-                f"{personality}\\n"
-                f"Here is the relevant context from the document:\\n{context}\\n\\n"
-                f"Question: {user_msg}"
-            )
+            system_content = f"{personality}\\n\\nHere is the relevant context from the documents:\\n{context}"
         else:
-            prompt = f"{personality}This is your next prompt: {user_msg}"
+            system_content = personality
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
+        payload = {
+            "model": MODEL_NAME,
+            "stream": False,
+            "messages": [
+                {"role": "system", "content": system_content},
+                {"role": "user", "content": user_msg}
+            ]
+        }
 
-        return {"response": response.text}
+        headers = {
+            "Authorization": f"Bearer {SENOPATI_API_KEY}",
+            "Content-Type": "application/json"
+        }
+
+        response = requests.post(SENOPATI_BASE_URL, json=payload, headers=headers)
+        response_data = response.json()
+
+        if response.status_code == 200:
+            ai_answer = response_data.get("message", {}).get("content", "")
+            return {"response": ai_answer}
+        else:
+            return {"response": f"API Error ({response.status_code}): {response_data}"}
     except Exception as e:
         print(f"CRITICAL ERROR: {e}")
         return {"response": f"Internal Error: {str(e)}"}
@@ -445,7 +448,8 @@ if __name__ == "__main__":
       <H2>Mini Quiz</H2>
       <p>
         Test your understanding of this module. Pick an answer to get instant
-        feedback, then see your score at the end — you can redo the quiz anytime.
+        feedback, then see your score at the end — you can redo the quiz
+        anytime.
       </p>
       <Quiz questions={modul4Quiz} />
     </DocArticle>

@@ -35,7 +35,7 @@ const STYLES: Record<
 
 /**
  * Tailwind-style alert: a thin left border, ultra-light tinted background,
- * and small text. No drop shadow, no rounded-3xl — just a quiet aside.
+ * and small text. No drop shadow, no rounded-3xl, just a quiet aside.
  */
 export function Callout({ type = "note", title, children }: CalloutProps) {
   const style = STYLES[type];

@@ -20,8 +20,8 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "RAG Workshop — AP Lab",
-    template: "%s — RAG Workshop",
+    default: "RAG Workshop by AP Lab",
+    template: "%s | RAG Workshop",
   },
   description:
     "Retrieval-Augmented Generation (RAG) workshop documentation: from LLM fundamentals and knowledge injection to building a document-aware chatbot with SENOPATI and ChromaDB. Hosted by AP Lab.",
@@ -42,19 +42,19 @@ export default function RootLayout({
 
         <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-8 xl:grid-cols-[16rem_minmax(0,1fr)_16rem]">
-            {/* Left sidebar — fixed width, independently scrollable */}
+            {/* Left sidebar: fixed width, independently scrollable */}
             <aside className="hidden lg:block">
               <div className="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto py-8 pr-2">
                 <SidebarNav />
               </div>
             </aside>
 
-            {/* Center column — readable measure, capped width */}
+            {/* Center column: readable measure, capped width */}
             <main className="min-w-0">
               <div className="mx-auto max-w-3xl xl:mx-0">{children}</div>
             </main>
 
-            {/* Right sidebar — table of contents */}
+            {/* Right sidebar: table of contents */}
             <aside className="hidden xl:block">
               <div className="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto py-10 pl-2">
                 <OnThisPage />
@@ -74,7 +74,7 @@ function SiteFooter() {
     <footer className="mt-8 border-t border-slate-200">
       <div className="mx-auto flex max-w-8xl flex-col items-start justify-between gap-3 px-4 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:px-6 lg:px-8">
         <p>
-          © {new Date().getFullYear()} AP Lab — RAG Workshop materials.
+          © {new Date().getFullYear()} AP Lab. RAG Workshop materials.
         </p>
         <div className="flex items-center gap-5">
           <a

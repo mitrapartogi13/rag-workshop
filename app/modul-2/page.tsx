@@ -87,7 +87,7 @@ export default function Modul2Page() {
         </li>
         <li>
           <code>requests</code> — used to send the HTTP request to the
-          SENOPATI gateway in <code>call_llm()</code>.
+          SENOPATI gateway from the <code>/chat</code> endpoint.
         </li>
         <li>
           <code>pydantic</code> — provides <code>BaseModel</code>, used to
@@ -109,7 +109,7 @@ export default function Modul2Page() {
       <CodeBlock
         lang="bash"
         filename=".env"
-        code={`LLM_API_KEY=PASTE_SENOPATI_KEY_HERE\nLLM_BASE_URL=https://proxy.lab-alpro.com\nLLM_MODEL=qwen3.5:9b
+        code={`SENOPATI_API_KEY=PASTE_SENOPATI_KEY_HERE\nSENOPATI_BASE_URL=https://proxy.lab-alpro.com/v1/chat\nMODEL_NAME=qwen3.5:9b
         `}
       />
 
@@ -124,12 +124,11 @@ export default function Modul2Page() {
         filename="main.py"
         code={`import os
 import requests
-from fastapi import FastAPI, Request, UploadFile, File
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
-from rag import process_pdf, retrieve, has_documents
 
 load_dotenv()
 
@@ -143,82 +142,62 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Model configuration is read from .env so it can be changed easily without touching the code.
-# This gateway (Senopati AI Gateway) is an authenticated proxy in front of Ollama:
-#   - chat endpoint: POST {BASE_URL}/v1/chat
-#   - request & response follow the Ollama format (not OpenAI)
-API_KEY = os.getenv("LLM_API_KEY")
-BASE_URL = os.getenv("LLM_BASE_URL", "https://proxy.lab-alpro.com").rstrip("/")
-MODEL = os.getenv("LLM_MODEL", "qwen3.5:9b")
-
-
-def call_llm(prompt: str) -> str:
-    """Send the prompt to the gateway and return the model's reply text."""
-    resp = requests.post(
-        f"{BASE_URL}/v1/chat",
-        headers={
-            "Authorization": f"Bearer {API_KEY}",
-            "Content-Type": "application/json",
-            # Some proxies (Cloudflare) reject non-browser clients.
-            "User-Agent": "Mozilla/5.0",
-        },
-        json={
-            "model": MODEL,
-            "messages": [{"role": "user", "content": prompt}],
-            "stream": False,
-        },
-        timeout=120,
-    )
-
-    # The gateway uses a consistent error envelope: {"error": {"code", "message", ...}}.
-    # Surface the original message so it's easy to diagnose (IP, model, rate limit, etc).
-    if resp.status_code != 200:
-        try:
-            err = resp.json().get("error", {})
-            raise RuntimeError(f"[{err.get('code')}] {err.get('message')}")
-        except ValueError:
-            resp.raise_for_status()
-
-    data = resp.json()
-    # Ollama response format: {"message": {"role": "...", "content": "..."}, ...}
-    return data["message"]["content"]
+# Senopati Gateway configuration, read from .env
+SENOPATI_API_KEY = os.getenv("SENOPATI_API_KEY")
+SENOPATI_BASE_URL = os.getenv("SENOPATI_BASE_URL")
+MODEL_NAME = os.getenv("MODEL_NAME")
 
 class ChatRequest(BaseModel):
     message: str
 
 @app.get("/", response_class=HTMLResponse)
 async def get_index():
-    with open("index.html", "r") as f:
+    with open("index.html", "r", encoding="utf-8") as f:
         return f.read()
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
     try:
+        # System persona for the Competitive Programming assistant
         personality = (
-            "Act as an assistant in Competitive Programming."
-            "Be as acknowledgeable in the subject as possible."
-            "Be as annoying as possible. Connect every single prompt to competitive programming."
-            "Even a simple hello should be connected to competitive programming."
-            "Act like you're trying to 'solve' the user's message, even if it's not a problem to solve."
+            "Act as an assistant in Competitive Programming.\\n"
+            "Be as acknowledgeable in the subject as possible.\\n"
+            "Be as annoying as possible. Connect every single prompt to competitive programming.\\n"
+            "Even a simple hello should be connected to competitive programming.\\n"
+            "Act like you're trying to 'solve' the user's message, even if it's not a problem to solve.\\n"
             "Please use standard LaTeX for math and Markdown for bolding."
         )
 
         user_msg = request.message
+        system_content = personality
 
-        if has_documents():
-            # RAG mode: there are stored documents
-            # Retrieve the relevant chunks, then inject them as context into the prompt
-            context = retrieve(user_msg)
-            prompt = (
-                f"{personality}"
-                f"Here is the relevant context from the documents:{context}"
-                f"Question: {user_msg}"
-            )
+        # Assemble the payload for the /v1/chat endpoint
+        payload = {
+            "model": MODEL_NAME,
+            "stream": False,
+            "messages": [
+                {"role": "system", "content": system_content},
+                {"role": "user", "content": user_msg}
+            ]
+        }
+
+        # Set the authorization header
+        headers = {
+            "Authorization": f"Bearer {SENOPATI_API_KEY}",
+            "Content-Type": "application/json"
+        }
+
+        # Send the request to Senopati
+        response = requests.post(SENOPATI_BASE_URL, json=payload, headers=headers)
+        response_data = response.json()
+
+        # Handle the API response
+        if response.status_code == 200:
+            ai_answer = response_data.get("message", {}).get("content", "")
+            return {"response": ai_answer}
         else:
-            # Fallback mode: no documents yet, use the plain prompt
-            prompt = f"{personality}This is your next prompt: {user_msg}"
+            return {"response": f"API Error ({response.status_code}): {response_data}"}
 
-        return {"response": call_llm(prompt)}
     except Exception as e:
         print(f"CRITICAL ERROR: {e}")
         return {"response": f"Internal Error: {str(e)}"}
@@ -234,11 +213,8 @@ if __name__ == "__main__":
       </p>
       <ul>
         <li>
-          <a
-            href="https://github.com/Algoritma-dan-Pemrograman-ITS/Camin-2026/blob/main/Materi%203/index.html"
-            target="_blank"
-            rel="noreferrer">
-            index.html template (GitHub)
+          <a href="/index.html" download>
+            index.html template
           </a>
         </li>
       </ul>

@@ -16,7 +16,7 @@ export default function Modul3Page() {
       href="/modul-3"
       eyebrow="Workshop Modules"
       title="Module 3: Understanding RAG"
-      lead="The ideas behind a document-aware chatbot — chunking, embeddings, and vector stores — plus the libraries we need before we start coding."
+      lead="The ideas behind a document-aware chatbot (chunking, embeddings, and vector stores), plus the libraries we need before we start coding."
     >
       <Figure
         src="https://github.com/user-attachments/assets/43cf4a65-725f-4db6-9d04-5441fabf486b"
@@ -30,7 +30,7 @@ export default function Modul3Page() {
         on that PDF.
       </p>
       <p>
-        We will build it <strong>step by step</strong> — not all at once — so each
+        We will build it <strong>step by step</strong>, not all at once, so each
         part can be understood and tested before moving on to the next.
       </p>
 
@@ -180,7 +180,7 @@ User question -> turn into a vector -> find the most similar chunks in ChromaDB
       <H2>Mini Quiz</H2>
       <p>
         Test your understanding of this module. Pick an answer to get instant
-        feedback, then see your score at the end — you can redo the quiz anytime.
+        feedback, then see your score at the end. You can redo the quiz anytime.
       </p>
       <Quiz questions={modul3Quiz} />
     </DocArticle>

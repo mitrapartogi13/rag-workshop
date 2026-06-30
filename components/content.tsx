@@ -44,7 +44,7 @@ export function H3({ children }: { children: string }) {
 
 /**
  * A simple bordered card grid for linking out to related pages. Flat borders
- * and a quiet hover tint — deliberately not a glowing gradient card.
+ * and a quiet hover tint, deliberately not a glowing gradient card.
  */
 export function CardGrid({ children }: { children: ReactNode }) {
   return (

@@ -3,7 +3,7 @@ import { getAdjacentPages } from "@/lib/nav";
 import { Pagination } from "@/components/pagination";
 
 type DocArticleProps = {
-  /** Current route — used to compute prev/next pagination. */
+  /** Current route, used to compute prev/next pagination. */
   href: string;
   /** Small category label above the title. */
   eyebrow?: string;
@@ -16,7 +16,7 @@ type DocArticleProps = {
 /**
  * Shared page chrome: eyebrow + title + lead, the prose body, and the
  * previous/next footer. The long list of `prose-*` modifiers reproduces the
- * Tailwind docs reading experience — slate-900 headings, slate-700 body,
+ * Tailwind docs reading experience: slate-900 headings, slate-700 body,
  * sky links, and quiet inline code without backtick pseudo-elements.
  */
 export function DocArticle({

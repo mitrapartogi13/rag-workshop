@@ -43,15 +43,15 @@ export default function HomePage() {
       <p>This makes answers:</p>
       <ul>
         <li>
-          <strong>More factual</strong> — based on real documents instead of the
+          <strong>More factual</strong>: based on real documents instead of the
           model&apos;s best guess.
         </li>
         <li>
-          <strong>Easy to update</strong> — just change the source documents, no
+          <strong>Easy to update</strong>: just change the source documents, no
           retraining required.
         </li>
         <li>
-          <strong>Traceable</strong> — every answer can be linked back to its
+          <strong>Traceable</strong>: every answer can be linked back to its
           source.
         </li>
       </ul>
@@ -147,7 +147,7 @@ export default function HomePage() {
         <Card
           eyebrow="Module 3"
           title="Understanding RAG"
-          description="Chunking, embeddings, and vector stores — the ideas behind RAG."
+          description="Chunking, embeddings, and vector stores: the ideas behind RAG."
           href="/modul-3"
         />
         <Card

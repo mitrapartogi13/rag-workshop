@@ -3,7 +3,7 @@
  *
  * We deliberately avoid pulling in a full highlighting engine (Shiki/Prism)
  * to keep the bundle lean and the output predictable. The tokenizer covers
- * the two languages this workshop actually uses — Python and shell — and
+ * the two languages this workshop actually uses, namely Python and shell, and
  * falls back to plain (escaped) text for anything else.
  *
  * Each token is wrapped in a `.tok-*` span; the colors live in globals.css.
@@ -60,7 +60,7 @@ function highlightPython(code: string): string {
 }
 
 /**
- * Highlight shell/bash. Lighter than Python — we color comments, strings,
+ * Highlight shell/bash. Lighter than Python: we color comments, strings,
  * variables and option flags, leaving bare commands in the default tone.
  */
 function highlightBash(code: string): string {

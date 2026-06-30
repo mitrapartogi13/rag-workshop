@@ -2,7 +2,7 @@
  * Mini-quiz question banks, one array per module.
  *
  * Each question has four options, a single correct `answer` (index), and an
- * `explanation` written to explain the correct answer — the Quiz component
+ * `explanation` written to explain the correct answer. The Quiz component
  * frames it either as confirmation (when right) or as a correction (when
  * wrong), so one explanation field serves both cases.
  */
@@ -25,7 +25,7 @@ export const modul1Quiz: QuizQuestion[] = [
     ],
     answer: 0,
     explanation:
-      "LLM stands for Large Language Model — an AI model trained to understand and generate human-like text.",
+      "LLM stands for Large Language Model, an AI model trained to understand and generate human-like text.",
   },
   {
     question: "How does an LLM fundamentally generate text?",
@@ -89,7 +89,7 @@ export const modul1Quiz: QuizQuestion[] = [
     options: ["Prompt Engineering", "RAG", "Fine-tuning", "Few-shot prompting"],
     answer: 2,
     explanation:
-      "Fine-tuning retrains part of the model, permanently changing its weights — its long-term memory.",
+      "Fine-tuning retrains part of the model, permanently changing its weights (its long-term memory).",
   },
   {
     question: "When should you prefer RAG over fine-tuning?",
@@ -113,7 +113,7 @@ export const modul1Quiz: QuizQuestion[] = [
     ],
     answer: 0,
     explanation:
-      "Context placed in the prompt behaves like short-term memory — it influences only that request, unlike fine-tuning's long-term changes.",
+      "Context placed in the prompt behaves like short-term memory: it influences only that request, unlike fine-tuning's long-term changes.",
   },
 ];
 
@@ -165,7 +165,7 @@ export const modul2Quiz: QuizQuestion[] = [
     ],
     answer: 1,
     explanation:
-      "main.py is the FastAPI backend — the 'brain' that links the web interface to the Gemini AI model.",
+      "main.py is the FastAPI backend, the 'brain' that links the web interface to the Gemini AI model.",
   },
   {
     question: "Which Gemini model is used in the workshop code?",
@@ -340,7 +340,7 @@ export const modul3Quiz: QuizQuestion[] = [
     ],
     answer: 1,
     explanation:
-      "FastAPI needs python-multipart to handle multipart form data — which is how the PDF file upload is sent.",
+      "FastAPI needs python-multipart to handle multipart form data, which is how the PDF file upload is sent.",
   },
 ];
 
@@ -451,7 +451,7 @@ export const modul4Quiz: QuizQuestion[] = [
     ],
     answer: 1,
     explanation:
-      "With no stored documents, chat() uses the plain personality prompt — the normal chatbot behaviour (fallback mode).",
+      "With no stored documents, chat() uses the plain personality prompt, the normal chatbot behaviour (fallback mode).",
   },
   {
     question: "How are the retrieved chunks combined before going into the prompt?",
@@ -502,13 +502,13 @@ export const modul5Quiz: QuizQuestion[] = [
     ],
     answer: 1,
     explanation:
-      "ModuleNotFoundError means a dependency is missing — re-run the pip install commands from the setup steps.",
+      "ModuleNotFoundError means a dependency is missing, so re-run the pip install commands from the setup steps.",
   },
   {
     question: "The app seems frozen on the first upload. The most likely reason is…",
     options: [
       "The ~90 MB embedding model is downloading",
-      "Gemini is offline",
+      "SENOPATI is offline",
       "The PDF has too many pages",
       "ChromaDB is corrupted",
     ],
@@ -533,7 +533,7 @@ export const modul5Quiz: QuizQuestion[] = [
     options: [
       "No documents were stored, or retrieval found nothing useful",
       "The browser cache",
-      "The wrong Gemini model",
+      "The wrong SENOPATI model",
       "A missing index.html",
     ],
     answer: 0,

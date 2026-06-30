@@ -9,7 +9,7 @@ import { CheckIcon, CloseIcon, RefreshIcon } from "@/components/icons";
  * Interactive mini quiz.
  *
  * Flow: one question at a time. Selecting an option locks the answer and
- * reveals instant feedback — a short confirmation when correct, or the correct
+ * reveals instant feedback: a short confirmation when correct, or the correct
  * answer plus an explanation when wrong. After the last question a score
  * screen appears with a "Redo quiz" button that resets all state.
  */
@@ -138,7 +138,7 @@ export function Quiz({ questions }: { questions: QuizQuestion[] }) {
           >
             {isCorrect
               ? "Correct!"
-              : `Not quite — the correct answer is ${String.fromCharCode(
+              : `Not quite. The correct answer is ${String.fromCharCode(
                   65 + question.answer
                 )}.`}
           </p>
@@ -195,7 +195,7 @@ function ScoreScreen({
         {score} <span className="text-slate-300">/</span> {total}
       </p>
       <p className="mt-1 text-sm font-medium text-sky-600">
-        {pct}% — {message}
+        {pct}%, {message}
       </p>
       <div className="mx-auto mt-4 h-2 w-full max-w-xs overflow-hidden rounded-full bg-slate-100">
         <div

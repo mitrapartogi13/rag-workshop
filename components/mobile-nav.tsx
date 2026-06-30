@@ -12,7 +12,7 @@ import { CloseIcon, MenuIcon } from "@/components/icons";
  *
  * The overlay is rendered through a portal to `document.body`: the sticky
  * header uses `backdrop-blur`, which establishes a containing block for any
- * fixed-positioned descendant — without the portal the drawer would be
+ * fixed-positioned descendant; without the portal the drawer would be
  * clipped to the height of the header.
  */
 export function MobileNav() {
