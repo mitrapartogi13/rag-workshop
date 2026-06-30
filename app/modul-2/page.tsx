@@ -204,7 +204,9 @@ if __name__ == "__main__":
       </p>
       <ul>
         <li>
-          <a href="/index.html" download>
+          <a
+            href="https://github.com/mitrapartogi13/template-simple-chatbot-rag-workshop.git"
+            download>
             index.html template
           </a>
         </li>
