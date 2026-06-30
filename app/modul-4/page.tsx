@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { DocArticle } from "@/components/doc-article";
-import { H2, H3 } from "@/components/content";
+import { Figure, H2, H3 } from "@/components/content";
 import { Callout } from "@/components/callout";
 import { Quiz } from "@/components/quiz";
 import { modul4Quiz } from "@/lib/quizzes";
@@ -163,11 +163,20 @@ async def upload_pdf(file: UploadFile = File(...)):
         automatically in your project directory.
       </p>
 
+
+      <Figure
+              src="/app-result-modul-4.webp"
+              alt="The running chatbot web interface in the browser."
+              caption="Example of a pdf upload result in the browser. The message shows how many chunks were stored in ChromaDB."
+              maxWidth={480}
+      />
       <H2>Inspecting ChromaDB</H2>
       <p>
         After uploading, how do we know the data was really stored? We can peek
         directly into ChromaDB using various tools. For now we will use the{" "}
-        <a href="/viewer.py" download>
+        <a
+          href="https://github.com/mitrapartogi13/template-simple-chatbot-rag-workshop/blob/main/viewer.py"
+          download>
           viewer.py
         </a>{" "}
         script, a small Streamlit app that reads the same{" "}
@@ -177,9 +186,8 @@ async def upload_pdf(file: UploadFile = File(...)):
       <H3>Run the viewer</H3>
       <p>
         Download <code>viewer.py</code> into the same project folder as{" "}
-        <code>main.py</code> (it needs to see the{" "}
-        <code>chroma_db/</code> folder next to it). Install Streamlit, then
-        launch it:
+        <code>main.py</code> (it needs to see the <code>chroma_db/</code> folder
+        next to it). Install Streamlit, then launch it:
       </p>
       <CodeBlock lang="bash" code={`pip install streamlit`} />
       <CodeBlock lang="bash" code={`streamlit run viewer.py`} />
@@ -196,8 +204,7 @@ async def upload_pdf(file: UploadFile = File(...)):
       <ul>
         <li>
           <strong>Overview</strong>: total chunk count and a preview of the
-          first five chunks, so you can confirm something was actually
-          stored.
+          first five chunks, so you can confirm something was actually stored.
         </li>
         <li>
           <strong>Browse</strong>: every stored chunk, paginated, with a text
@@ -210,15 +217,15 @@ async def upload_pdf(file: UploadFile = File(...)):
         </li>
         <li>
           <strong>Manage</strong>: delete all chunks from the selected
-          collection, useful for resetting your knowledge base without
-          touching files manually.
+          collection, useful for resetting your knowledge base without touching
+          files manually.
         </li>
       </ul>
       <Callout type="tip" title="Why bother">
         The viewer is optional, but it turns retrieval from a black box into
         something you can see. If a chatbot answer looks wrong, check{" "}
-        <strong>Semantic Search</strong> first: if the right chunk is not in
-        the results, the problem is in retrieval, not the LLM.
+        <strong>Semantic Search</strong> first: if the right chunk is not in the
+        results, the problem is in retrieval, not the LLM.
       </Callout>
 
       <H2>The Retrieve: Finding Relevant Chunks</H2>

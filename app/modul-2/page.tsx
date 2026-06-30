@@ -205,7 +205,7 @@ if __name__ == "__main__":
       <ul>
         <li>
           <a
-            href="https://github.com/mitrapartogi13/template-simple-chatbot-rag-workshop.git"
+            href="https://github.com/mitrapartogi13/template-simple-chatbot-rag-workshop/blob/main/index.html"
             download>
             index.html template
           </a>

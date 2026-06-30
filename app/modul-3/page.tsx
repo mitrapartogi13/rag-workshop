@@ -106,7 +106,8 @@ User question -> turn into a vector -> find the most similar chunks in ChromaDB
       <p>Run the following command in your project folder:</p>
       <CodeBlock
         lang="bash"
-        code={`pip install langchain-community langchain-text-splitters pypdf chromadb sentence-transformers python-multipart`}
+        code={`pip install langchain-community langchain-text-splitters pypdf chromadb sentence-transformers python-multipart
+          pip install langchain-community langchain-text-splitters pypdf chromadb sentence-transformers python-multipart`}
       />
       <p>A short explanation of each library:</p>
       <table>
