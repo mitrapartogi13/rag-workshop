@@ -41,10 +41,10 @@ export const modul1Quiz: QuizQuestion[] = [
   },
   {
     question: "Which of these is an open-source LLM family?",
-    options: ["ChatGPT", "Gemini", "Llama", "Claude"],
+    options: ["ChatGPT", "Grok", "Llama", "Claude"],
     answer: 2,
     explanation:
-      "Llama (along with Mistral and Qwen) is open-source. ChatGPT, Gemini, and Claude are proprietary models.",
+      "Llama (along with Mistral and Qwen) is open-source. ChatGPT, Grok, and Claude are proprietary models.",
   },
   {
     question: "Which knowledge-injection method is the simplest?",
@@ -119,23 +119,23 @@ export const modul1Quiz: QuizQuestion[] = [
 
 export const modul2Quiz: QuizQuestion[] = [
   {
-    question: "Where do you generate the Gemini API key in this workshop?",
+    question: "Where do you get the SENOPATI API key in this workshop?",
     options: [
       "Google AI Studio",
-      "GitHub",
+      "From the instructor",
       "ChromaDB dashboard",
       "The Python terminal",
     ],
-    answer: 0,
+    answer: 1,
     explanation:
-      "You create the key in Google AI Studio (aistudio.google.com/app/apikey) after signing in with a Google account.",
+      "SENOPATI is a shared gateway set up for the workshop, so the instructor hands out the API key directly.",
   },
   {
     question: "Why is the API key stored in a .env file?",
     options: [
       "To make the code run faster",
       "To keep the key out of the source code so it isn't exposed",
-      "Because Gemini requires that exact filename",
+      "Because SENOPATI requires that exact filename",
       "To translate the key into another format",
     ],
     answer: 1,
@@ -148,43 +148,43 @@ export const modul2Quiz: QuizQuestion[] = [
     options: [
       "chromadb, pypdf, sentence-transformers",
       "numpy, pandas, scikit-learn",
-      "fastapi, uvicorn, google-genai, python-dotenv",
+      "fastapi, uvicorn, requests, pydantic, python-dotenv",
       "flask, django, requests",
     ],
     answer: 2,
     explanation:
-      "The basic chatbot needs fastapi and uvicorn (the server), google-genai (the Gemini client), and python-dotenv (to read .env).",
+      "The basic chatbot needs fastapi and uvicorn (the server), requests (to call SENOPATI), pydantic (request models), and python-dotenv (to read .env).",
   },
   {
     question: "What is the role of main.py?",
     options: [
       "It stores the API key",
-      "It is the backend that connects the user interface to the Gemini model",
+      "It is the backend that connects the user interface to the SENOPATI model",
       "It is the chat front-end",
       "It is the vector database",
     ],
     answer: 1,
     explanation:
-      "main.py is the FastAPI backend, the 'brain' that links the web interface to the Gemini AI model.",
+      "main.py is the FastAPI backend, the 'brain' that links the web interface to the SENOPATI-hosted model.",
   },
   {
-    question: "Which Gemini model is used in the workshop code?",
-    options: ["gemini-2.5-flash", "gemini-1.0-pro", "gpt-4o", "claude-3"],
+    question: "Which .env variable holds the model name used in the workshop code?",
+    options: ["MODEL_NAME", "SENOPATI_BASE_URL", "GEMINI_API_KEY", "APP_MODEL"],
     answer: 0,
     explanation:
-      "The code calls gemini-2.5-flash, a fast and free-tier-friendly model. You can swap it for others from the model list.",
+      "MODEL_NAME (set to qwen3.5:9b in the workshop) is read from .env and sent as the model field in the request payload.",
   },
   {
     question: "What does load_dotenv() do?",
     options: [
       "Starts the web server",
       "Loads variables from the .env file into the environment",
-      "Downloads the Gemini model",
+      "Downloads the SENOPATI model",
       "Connects to ChromaDB",
     ],
     answer: 1,
     explanation:
-      "load_dotenv() reads the .env file and loads its values (like GEMINI_API_KEY) into environment variables.",
+      "load_dotenv() reads the .env file and loads its values (like SENOPATI_API_KEY) into environment variables.",
   },
   {
     question: "Why is CORS middleware added to the FastAPI app?",
@@ -280,7 +280,7 @@ export const modul3Quiz: QuizQuestion[] = [
     options: [
       "Serving the web page",
       "Storing vectors and finding the most similar ones",
-      "Calling the Gemini API",
+      "Calling the SENOPATI API",
       "Reading PDF files",
     ],
     answer: 1,
@@ -290,7 +290,7 @@ export const modul3Quiz: QuizQuestion[] = [
   {
     question: "When a user asks a question, what happens to it first?",
     options: [
-      "It is sent straight to Gemini",
+      "It is sent straight to SENOPATI",
       "It is turned into a vector to search ChromaDB",
       "It is saved to the .env file",
       "It is split into chunks",
@@ -333,7 +333,7 @@ export const modul3Quiz: QuizQuestion[] = [
   {
     question: "Why is python-multipart required?",
     options: [
-      "To connect to Gemini",
+      "To connect to SENOPATI",
       "So FastAPI can accept file uploads",
       "To split text into chunks",
       "To store vectors",
@@ -363,7 +363,7 @@ export const modul4Quiz: QuizQuestion[] = [
       "The full text of the PDF",
       "The number of chunks successfully stored",
       "A list of vectors",
-      "The Gemini response",
+      "The SENOPATI response",
     ],
     answer: 1,
     explanation:
@@ -375,7 +375,7 @@ export const modul4Quiz: QuizQuestion[] = [
       "To back it up permanently",
       "Because PyPDFLoader needs a file path to read from",
       "To compress it",
-      "To send it to Gemini",
+      "To send it to SENOPATI",
     ],
     answer: 1,
     explanation:
@@ -399,7 +399,7 @@ export const modul4Quiz: QuizQuestion[] = [
       "Whether the .env file exists",
       "Whether ChromaDB already has stored documents (count > 0)",
       "Whether the user is logged in",
-      "Whether Gemini is reachable",
+      "Whether SENOPATI is reachable",
     ],
     answer: 1,
     explanation:
@@ -411,7 +411,7 @@ export const modul4Quiz: QuizQuestion[] = [
       "The chunk size",
       "How many of the most similar chunks to return",
       "The number of PDFs allowed",
-      "The Gemini temperature",
+      "The SENOPATI temperature",
     ],
     answer: 1,
     explanation:
@@ -439,7 +439,7 @@ export const modul4Quiz: QuizQuestion[] = [
     ],
     answer: 1,
     explanation:
-      "In RAG mode, chat() calls retrieve(), adds the chunks as context, then asks Gemini to answer using that context.",
+      "In RAG mode, chat() calls retrieve(), adds the chunks as context, then asks SENOPATI to answer using that context.",
   },
   {
     question: "What happens when no documents have been uploaded yet?",
